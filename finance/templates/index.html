@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+
+<div class = "container">
+    <table class ="table">
+        <thead>
+        <tr>
+            <th>symbol</th>
+            <th>name</th>
+            <th>shares</th>
+            <th>price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for stock in stock %}
+        <tr>
+            <td>{{ stock["symbol"].upper() }}</td>
+            <td>{{ stock["name"] }}</td>
+            <td>{{ usd(stock['totalshares']) }}</td>
+            <td>{{ usd(stock['price']) }}</td>
+            <td>{{ usd(stock['totalshares'] and stock["price"]) }}</td>
+            <td>
+                <button class="btn btn-default" value="{{ stock['stock'] }}" data-action="buy">Buy</button>
+                <button class="btn btn-default" value="{{ stock['stock'] }}" data-action="sell">Sell</button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ usd(cash) }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>TOTAL</strong></td>
+            <td></td>
+            <td></td>
+            <td>{{ total }}</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+
+{% endblock %}

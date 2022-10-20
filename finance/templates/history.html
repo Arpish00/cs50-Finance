@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    history
+{% endblock %}
+
+{% block main %}
+
+<div class = "container">
+    <table class ="table">
+        <thead>
+        <tr>
+            <th>symbol</th>
+            <th>type</th>
+            <th>shares</th>
+            <th>price</th>
+
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transaction %}
+        <tr>
+            <td>{{ transaction["symbol"].upper() }}</td>
+            <td>{{ transaction["type"] }}</td>
+            <td>{{ usd(transaction['shares']) }}</td>
+            <td>{{ usd(transaction['price']) }}</td>
+            <td>{{ transaction['time'] }}</td>
+            
+        </tr>
+        {% endfor %}
+       </tbody>
+    </table>
+</div>
+<!--<script src="{{url_for('static', filename='button.js')}}"></script>-->
+
+{% endblock %}
